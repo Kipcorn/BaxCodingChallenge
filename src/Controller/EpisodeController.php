@@ -23,9 +23,8 @@ class EpisodeController extends AbstractController
         $episodeData = $this->apiService->getApiData(APiResourceType::EPISODE->value, $slug);
 
         $characters = $episodeData['characters'];
-        $characterIds = $this->utilityService->extractNumericIds($characters);
 
-        $characterDataList = $this->apiService->getApiData(APiResourceType::CHARACTER->value, $characterIds);
+        $characterDataList = $this->apiService->getApiData(APiResourceType::CHARACTER->value, $this->utilityService->extractNumericIds($characters));
         
         return $this->render('episodes.table.html.twig', [
             'episode'    => $episodeData,
