@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\ApiService;
+use App\Service\UtilityService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -10,7 +11,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class EpisodeController extends AbstractController
 {
     public function __construct(
-        private readonly ApiService $apiService)
+        private readonly ApiService $apiService,
+        private readonly UtilityService $utilityService)
         {  
         }
  
@@ -22,21 +24,7 @@ class EpisodeController extends AbstractController
         $characterDataList = [];
         $characters = $episodeData['characters'];
 
-        $id = [];
-
-        if (is_array($characters)) {
-            foreach ($characters as $character) 
-            {
-                $parts = explode('/', $character);
-                $id = end($parts);
-                if (is_numeric($id)) {
-                    $ids[] = $id;
-                }  
-            }
-        }
-
-        $idString = implode(',', $ids);
-        $characterDataList[] = $this->apiService->getCharacterData($idString);
+        $characterDataList[] = $this->apiService->getCharacterData($this->utilityService->extractNumericIds($characters));
         
         return $this->render('episodes.table.html.twig', [
             'episode' => $episodeData,

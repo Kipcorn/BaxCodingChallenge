@@ -3,23 +3,19 @@
 namespace App\Service;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
-
 
 class ApiService
 {
-    private HttpClientInterface $client;
-
-    public function __construct(HttpClientInterface $client)
+    public function __construct(
+        private readonly HttpClientInterface $client)
     {
-        $this->client = $client;
     }
 
     public function getEpisodeData(string $slug): ?array
     {
         $response = $this->client->request(
         'GET', 
-        "https://rickandmortyapi.com/api/episode/$slug"
+        "https://rickandmortyapi.com/api/episode/" . $slug
         );
         
         if ($response->getStatusCode() !== 200) {
@@ -33,7 +29,7 @@ class ApiService
     {
         $response = $this->client->request(
             'GET', 
-            "https://rickandmortyapi.com/api/location/$slug"
+            "https://rickandmortyapi.com/api/location/" . $slug
             );
             
             if ($response->getStatusCode() !== 200) {
