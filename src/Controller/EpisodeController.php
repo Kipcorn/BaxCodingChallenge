@@ -9,12 +9,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class EpisodeController extends AbstractController
 {
-    private $apiService;
-    public function __construct(ApiService $apiService)
-    {
-        $this->apiService = $apiService;
-    }
-    
+    public function __construct(
+        private readonly ApiService $apiService)
+        {  
+        }
+ 
     #[Route('/episodes/{slug}', name: 'episodes')]
     public function indexEpisode(string $slug): Response
     {
