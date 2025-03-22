@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Service\ApiDataType;
 use App\Service\APiResourceType;
 use App\Service\ApiService;
 use App\Service\UtilityService;
