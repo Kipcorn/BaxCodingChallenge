@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Service\ApiDataType;
+use App\Service\APiResourceType;
 use App\Service\ApiService;
 use App\Service\UtilityService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,15 +21,15 @@ class EpisodeController extends AbstractController
     #[Route('/episodes/{slug}', name: 'episodes')]
     public function indexEpisode(string $slug): Response
     {
-        $episodeData = $this->apiService->getEpisodeData($slug);
+        $episodeData = $this->apiService->getApiData(APiResourceType::EPISODE->value, $slug);
 
-        $characterDataList = [];
         $characters = $episodeData['characters'];
+        $characterIds = $this->utilityService->extractNumericIds($characters);
 
-        $characterDataList[] = $this->apiService->getCharacterData($this->utilityService->extractNumericIds($characters));
+        $characterDataList = $this->apiService->getApiData(APiResourceType::CHARACTER->value, $characterIds);
         
         return $this->render('episodes.table.html.twig', [
-            'episode' => $episodeData,
+            'episode'    => $episodeData,
             'characters' => $characterDataList
         ]);
     }
