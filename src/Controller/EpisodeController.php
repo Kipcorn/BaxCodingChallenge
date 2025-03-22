@@ -23,12 +23,21 @@ class EpisodeController extends AbstractController
         $characterDataList = [];
         $characters = $episodeData['characters'];
 
+        $id = [];
+
         if (is_array($characters)) {
             foreach ($characters as $character) 
             {
-                $characterDataList[] = $this->apiService->getCharacterData($character);
+                $parts = explode('/', $character);
+                $id = end($parts);
+                if (is_numeric($id)) {
+                    $ids[] = $id;
+                }  
             }
         }
+
+        $idString = implode(',', $ids);
+        $characterDataList[] = $this->apiService->getCharacterData($idString);
         
         return $this->render('episodes.table.html.twig', [
             'episode' => $episodeData,

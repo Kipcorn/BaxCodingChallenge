@@ -43,11 +43,11 @@ class ApiService
         return $response->toArray();
     }
 
-    public function getCharacterData(string $character): ?array
+    public function getCharacterData(string $idString): ?array
     {
         $response = $this->client->request(
         'GET', 
-        $character
+        "https://rickandmortyapi.com/api/character/" . $idString
         );
         
         if ($response->getStatusCode() !== 200) {
