@@ -9,22 +9,6 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class MainController extends AbstractController
 {
-    private $apiService;
 
-    public function __construct(ApiService $apiService)
-    {
-        $this->apiService = $apiService;
-    }
-    
-    #[Route('/')]
-    public function index(): Response
-    {
-        $characters = $this->apiService->getApiData();
-
-        return $this->render('table.html.twig', [
-            'characters' => $characters
-        ]);
-    }
-    
 
 }

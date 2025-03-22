@@ -8,25 +8,53 @@ use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class ApiService
 {
-    private $client;
+    private HttpClientInterface $client;
 
     public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
     }
 
-    public function getApiData(): ?array
+    public function getEpisodeData(string $slug): ?array
     {
         $response = $this->client->request(
         'GET', 
-        "https://rickandmortyapi.com/api/character"
+        "https://rickandmortyapi.com/api/episode/$slug"
         );
+        
+        if ($response->getStatusCode() !== 200) {
+            return null;
+        }
 
-        $content = $response->toArray();
-
-        $characters = $content['results'];
-
-        return $characters;
-
+        return $response->toArray();
     }
+
+    public function getLocationData(string $slug): ?array
+    {
+        $response = $this->client->request(
+        'GET', 
+        "https://rickandmortyapi.com/api/location/$slug"
+        );
+        
+        if ($response->getStatusCode() !== 200) {
+            return null;
+        }
+
+        return $response->toArray();
+    }
+
+    public function getCharacterData(string $character): ?array
+    {
+        $response = $this->client->request(
+        'GET', 
+        $character
+        );
+        
+        if ($response->getStatusCode() !== 200) {
+            return null;
+        }
+
+        return $response->toArray();
+    }
+    
 }
