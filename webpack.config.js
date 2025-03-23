@@ -71,6 +71,9 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     //.autoProvidejQuery()
+
+    //enables PostCSS support
+    .enablePostCssLoader();
 ;
 
 module.exports = Encore.getWebpackConfig();
