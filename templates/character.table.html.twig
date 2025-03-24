@@ -1,0 +1,69 @@
+{% set MainCharacterIds = [
+    'https://rickandmortyapi.com/api/character/1', 
+    'https://rickandmortyapi.com/api/character/2', 
+    'https://rickandmortyapi.com/api/character/3', 
+    'https://rickandmortyapi.com/api/character/4', 
+    'https://rickandmortyapi.com/api/character/5'
+    ] %}
+
+{% set mainCharacterArray = [] %}
+{% set otherCharacterArray = [] %}
+
+{% for character in characters %}
+  {% if character.url in MainCharacterIds %}
+    {% set mainCharacterArray = mainCharacterArray|merge([character]) %}
+  {% else %}
+    {% set otherCharacterArray = otherCharacterArray|merge([character]) %}
+  {% endif %}
+{% endfor %}
+
+{% if mainCharacterArray %}
+    <h2 class="text-center mt-4 text-4xl text-inherit">Smith Family</h2>
+{% endif %}
+
+<div class="flex flex-wrap justify-center mt-4 px-12">
+  {% for character in mainCharacterArray %}
+    <div class="flex-grow flex-shrink-0 basis-[250px] m-2 bg-white max-w-sm rounded overflow-hidden shadow-lg">
+      <img class="w-full" src="{{ character.image }}" alt="{{ character.name }}" />
+      <div class="p-6 w-2/3">
+        <h3 class="mb-3 text-2xl font-semibold">{{ character.name }}</h3>
+        <p class="text-lg text-gray-700">
+          <span class="font-semibold">Race:</span> {{ character.species }}<br />
+          {% if character.type is not empty %}
+            <span class="font-semibold">Type:</span> {{ character.type }}<br />
+          {% endif %}
+          <span class="font-semibold">Gender:</span> {{ character.gender }}<br />
+          <span class="font-semibold">Status:</span> {{character.status}}<br />
+          <span class="font-semibold">Last seen Location:</span> {{ character.location.name }}<br />
+          <span class="font-semibold">Origin Dimension:</span> {{ character.origin.name }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+
+{% if mainCharacterArray %}
+    <h2 class="text-center mt-4 text-4xl text-inherit">Side Characters</h2>
+{% endif %}
+
+<div class="flex flex-wrap justify-center mt-4 px-8">
+  {% for character in otherCharacterArray %}
+    <div class="flex-grow flex-shrink-0 basis-[200px] m-2 bg-white max-w-sm rounded overflow-hidden shadow-lg">
+      <img class="w-full" src="{{ character.image }}" alt="{{ character.name }}" />
+      <div class="p-2">
+        <h3 class="mb-3 text-xl font-semibold ">{{ character.name }}</span></h3>
+        <p class="text-xs text-gray-700 ">
+          <span class="font-semibold">Race:</span> {{ character.species }}<br />
+          {% if character.type is not empty %}
+            <span class="font-semibold">Type:</span> {{ character.type }}<br />
+          {% endif %}
+          <span class="font-semibold">Gender:</span> {{ character.gender }}<br />
+          <span class="font-semibold">Status:</span> {{character.status}}<br />
+          <span class="font-semibold">Last seen Location:</span> {{ character.location.name }}<br />
+          <span class="font-semibold">Origin Dimension:</span> {{ character.origin.name }}
+        </p>
+      </div>
+    </div>
+  {% endfor %}
+</div>

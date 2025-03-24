@@ -4,30 +4,15 @@
 
 {% block body %}
 
-    <ul style="background-color: white; padding: 25px; border: 1px solid #ddd; text-align: center;">
+    <ul class="bg-white p-6 text-center">
         <li><strong>Location:</strong> {{location.type}} - {{location.name}}</li>
         <li><strong>Dimension:</strong> {{ location.dimension }}</li>
         <li><strong>Amount of Residents:</strong> {{ location.residents|length }}</li>
     </ul>
 
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; padding: 25px">
-    {% for character in characters %}
-            <div class="bg-white max-w-sm rounded overflow-hidden shadow-lg" style="margin: 10px; flex: 1 0 200px;"> <img class="w-full" src="{{character.image}}" alt="{{character.name}}">
-                <div class="px-6 py-4">
-                    <div class="font-bold text-xl mb-2">{{ character.name}}</div>
-                    <p class="text-gray-700 text-base">
-                        <span class="font-semibold">Race:</span> {{ character.species }}<br>
-                        {% if character.type is not empty %}
-                            <span class="font-semibold">Type:</span> {{ character.type }}<br>
-                        {% endif %}
-                        <span class="font-semibold">Gender:</span> {{ character.gender }}<br>
-                        <span class="font-semibold">Last seen Location:</span> {{ character.location.name }}<br>
-                        <span class="font-semibold">Origin Dimension:</span> {{ character.origin.name }}
-                    </p>
-                </div>
-            </div>
-    {% endfor %}
-    </div>
+    {% include "character.table.html.twig" %}
+
+
 {% endblock %}
 
 
