@@ -22,9 +22,19 @@ class EpisodeController extends AbstractController
     {
         $episodeData = $this->apiService->getApiData(APiResourceType::EPISODE->value, $slug);
 
+        if(empty($episodeData)) {
+            return $this->render('error.html.twig', [
+                'message' => 'Episode not found'
+            ]);
+        }
+
         $characters = $episodeData['characters'];
 
         $characterDataList = $this->apiService->getApiData(APiResourceType::CHARACTER->value, $this->utilityService->extractNumericIds($characters));
+
+        if (!is_array(reset($characterDataList))) {
+            $characterDataList = [$characterDataList];
+        }
         
         return $this->render('episodes.table.html.twig', [
             'episode'    => $episodeData,
