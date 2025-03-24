@@ -1,12 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Locations</title>
-</head>
-<body>
 
-   {{ dump(location) }}
-   {{ dump(residents) }}
+{% extends 'base.html.twig' %}
 
-</body>
-</html>
+{% block title %}Locations{% endblock %}
+
+{% block body %}
+
+    <h1>Locations</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Residents</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% block table %}
+                {{ dump(location) }}
+                {{ dump(residents) }}
+            {% endblock %}
+        </tbody>
+    </table>
+
+{% endblock %}
+
+
