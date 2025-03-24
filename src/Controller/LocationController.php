@@ -17,18 +17,18 @@ class LocationController extends AbstractController
         {  
         }
  
-    #[Route('/locations/{slug}', name: 'locations')]
+    #[Route('/location/{slug}', name: 'locations')]
     public function indexLocation(string $slug): Response
     {
         $locationData = $this->apiService->getApiData(APiResourceType::LOCATION->value, $slug);
 
-        $residents = $locationData['residents'];
+        $characters = $locationData['residents'];
 
-        $residentDataList[] = $this->apiService->getApiData(APiResourceType::CHARACTER->value, $this->utilityService->extractNumericIds($residents));
+        $characterDataList = $this->apiService->getApiData(APiResourceType::CHARACTER->value, $this->utilityService->extractNumericIds($characters));
         
         return $this->render('locations.table.html.twig', [
             'location' => $locationData,
-            'residents' => $residentDataList
+            'characters' => $characterDataList
         ]);
     }
 

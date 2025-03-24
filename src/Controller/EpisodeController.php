@@ -17,7 +17,7 @@ class EpisodeController extends AbstractController
         {  
         }
  
-    #[Route('/episodes/{slug}', name: 'episodes')]
+    #[Route('/episode/{slug}', name: 'episodes')]
     public function indexEpisode(string $slug): Response
     {
         $episodeData = $this->apiService->getApiData(APiResourceType::EPISODE->value, $slug);
