@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\APiResourceType;
+use App\Service\ApiResourceType;
 use App\Service\ApiService;
 use App\Service\UtilityService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,12 +20,22 @@ class LocationController extends AbstractController
     #[Route('/location/{slug}', name: 'locations')]
     public function indexLocation(string $slug): Response
     {
-        $locationData = $this->apiService->getApiData(APiResourceType::LOCATION->value, $slug);
+        $locationData = $this->apiService->getApiData(ApiResourceType::LOCATION->value, $slug);
+
+        if(empty($locationData)) {
+            return $this->render('error.html.twig', [
+                'message' => 'Location not found'
+            ]);
+        }
 
         $characters = $locationData['residents'];
 
         $characterDataList = $this->apiService->getApiData(APiResourceType::CHARACTER->value, $this->utilityService->extractNumericIds($characters));
-        
+
+        if (!is_array(reset($characterDataList))) {
+            $characterDataList = [$characterDataList];
+        }
+
         return $this->render('locations.table.html.twig', [
             'location' => $locationData,
             'characters' => $characterDataList
