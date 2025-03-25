@@ -1,50 +1,64 @@
-# Bax Music Rick and Morty developer case
-To properly assert your level as a developer we would like you to do the following case. 
-Read the briefing carefully! You have a lot of creative freedom in this, go nuts and dazzle us.
+# BaxCodingChallenge
 
-![Mr Meeseeks](https://media.giphy.com/media/DgLsbUL7SG3kI/giphy.gif)
-![Rick](https://media.giphy.com/media/3oEduHUtBvTIIBosJq/giphy.gif)
+This project is a web application built with Symfony, utilizing the Rick and Morty API to display episode and location information. This project is a coding challenge for bax-shop.nl.
+
+## Installation
+
+1.  Clone the repository:
+
+    ```bash
+    git clone https://github.com/Kipcorn/BaxCodingChallenge.git
+    ```
+
+2.  Copy `.env.dist` to `.env`:
+
+    ```bash
+    cp .env.dist .env
+    ```
+
+3.  Install Composer dependencies:
+
+    ```bash
+    composer install
+    ```
+
+4.  Install npm dependencies:
+
+    ```bash
+    npm install
+    ```
+
+5.  Run npm for Encore:
+
+    ```bash
+    npm run dev
+    ```
+
+6.  Build the Docker container:
+
+    ```bash
+    docker compose up --build
+    ```
+
+## Usage
+
+* Visit `http://localhost:8080` in your web browser.
+* Browse episodes: `http://localhost:8080/episode/{episode_id}` (where `{episode_id}` is between 1 and 51).
+* Browse locations: `http://localhost:8080/location/{location_id}` (where `{location_id}` is between 1 and 126).
+
+## Future Features
+
+This section outlines potential features that may be added to the project in the future.
+
+* **Interactive front page**
+    * Give a more interactive front-page that redirects to the corresponding pages.
+* **Search Functionality:**
+    * Implement a search bar to filter episodes,locations and characters by name.
+* **Search by Dimension**
+    * implement feature that shows all characters from given dimension
+* **Additional Episode information**
+    * Using an external API for TV-shows get more information about an given episode (e.g synopsis, rating, etc)
 
 
-## The Case
-Using the API: https://rickandmortyapi.com/
-
-We want to see the following:
-- Show all characters that exist (or are last seen) in a given dimension
-- Show all characters that exist (or are last seen) at a given location
-- Show all characters that partake in a given episode
-- Showing all information of a character (Name, species, gender, last location, dimension, etc)
-
-## Frontend Developer vacancy
-
-Make use of the following: 
-- JavaScript
-- Stimulus
-- Webpack
-- CSS framework like Tailwind
-
-Show us what you can do!!
-
-## Backend Developer vacancy
-
-Make use of the following: 
-- PHP8+
-- Symfony
-- (If you're up to it, any of the items for the Frontend Developer vacancy)
-
-Show us what you can do!!
-
-## Method of delivery
-
-Give us the url to a git repo (github, bitbucket, gitlab). We want to see the process as well as the end result.
 
 
-## Bonus points
-
-- Use Docker
-- Use awesome techniques
-- Use latest features available in the development language
-- UI: Responsive and mobile first
-- Integrate 1 or more additional API's in a creative way
-
-![Show me what you got!](https://media.giphy.com/media/26DOs997h6fgsCthu/giphy.gif)
