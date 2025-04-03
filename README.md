@@ -1,7 +1,6 @@
 # BaxCodingChallenge
 
-This project is a web application built with Symfony, utilizing the Rick and Morty API to display episode and location information. This project is a coding challenge for bax-shop.nl.
-
+This project is a web application built with Symfony, utilizing the Rick and Morty API to display episode and location information.
 ## Installation
 
 1.  Clone the repository:
